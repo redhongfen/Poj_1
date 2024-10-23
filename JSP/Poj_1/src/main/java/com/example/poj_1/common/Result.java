@@ -3,7 +3,7 @@ package com.example.poj_1.common;
 import lombok.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://192.168.43.193:8080/")
+@CrossOrigin(origins = "http://localhost:8080/")
 @Getter
 @Setter
 @Data
