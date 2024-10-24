@@ -49,22 +49,37 @@
           <div style="box-shadow: 0 0 10px rgba(0,0,0,.1); padding: 10px 20px; border-radius: 5px; margin-bottom: 10px">
             早安，骚年，祝你开心每一天！
           </div>
-          <el-card style="width: 500px">
-            <div slot="header" class="clearfix">
-              <span>青哥哥带你做毕设2024</span>
-            </div>
-           <div>
-             2024毕设正式开始了！青哥哥带你手把手敲出来！
-             <div style="margin-top: 20px">
-               <div style="margin: 10px 0"><strong>主题色</strong></div>
-               <el-button type="primary">按钮</el-button>
-               <el-button type="success">按钮</el-button>
-               <el-button type="warning">按钮</el-button>
-               <el-button type="danger">按钮</el-button>
-               <el-button type="info">按钮</el-button>
-             </div>
-           </div>
-          </el-card>
+          <div style="display: flex;">
+          <el-card style="width: 50%;margin-right: 10px;">
+              <div slot="header" class="clearfix">
+                <span>青哥哥带你做毕设2024</span>
+              </div>
+              <div>
+                2024毕设正式开始了！青哥哥带你手把手敲出来！
+                <div style="margin-top: 20px">
+                  <div style="margin: 10px 0"><strong>主题色</strong></div>
+                  <el-button type="primary">按钮</el-button>
+                  <el-button type="success">按钮</el-button>
+                  <el-button type="warning">按钮</el-button>
+                  <el-button type="danger">按钮</el-button>
+                  <el-button type="info">按钮</el-button>
+                </div>
+              </div>
+            </el-card>
+            <el-card style="width: 50%">
+              <div slot="header" class="clearfix">
+                <span>用户数据</span>
+              </div>
+              <div class="">
+                <el-table :data="users">
+                  <el-table-column label="ID" prop="id"></el-table-column>
+                  <el-table-column label="用户名" prop="username"></el-table-column>
+                  <el-table-column label="姓名" prop="name"></el-table-column>
+                  <el-table-column label="地址" prop="address"></el-table-column>
+                </el-table>
+              </div>
+            </el-card>
+          </div>
 <!--          <el-table stripe :header-cell-style="{ backgroundColor: 'aliceblue', fontWeight: 'bold', color: '#333' }">-->
 <!--            <el-table-column label="姓名" align="center"></el-table-column>-->
 <!--            <el-table-column label="电话" align="center"></el-table-column>-->
@@ -79,6 +94,8 @@
 </template>
 
 <script>
+import request from '../utils/request';
+
 
 export default {
   name: 'HomeView',
@@ -86,12 +103,14 @@ export default {
     return {
       isCollapse: false,
       asideWidth: '200px',
-      collapseIcon: 'el-icon-s-fold'
+      collapseIcon: 'el-icon-s-fold',
+      users:[]
     }
   },
   mounted() {
-
-  },
+  request.get('/user/selectAll').then(res =>
+    this.users=res.data
+  )},
   methods: {
     handleFullScreen() {
       document.documentElement.requestFullscreen()
