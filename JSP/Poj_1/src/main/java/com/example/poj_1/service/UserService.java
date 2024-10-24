@@ -2,11 +2,14 @@ package com.example.poj_1.service;
 
 import com.example.poj_1.common.Page;
 import com.example.poj_1.eneity.User;
+import com.example.poj_1.exception.ServiceException;
 import com.example.poj_1.mapper.UserMapper;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -42,5 +45,27 @@ public class UserService {
         page.setToto(total);
         page.setList(userList);
         return page;
+    }
+
+    public User login(User user) {
+        User upuser=userMapper.selectByUsername(user.getUsername());
+        if(upuser==null){
+            throw new ServiceException("用户名或密码错误");
+        }
+        if(!Objects.equals(user.getPassword(), upuser.getPassword())){
+            throw new ServiceException("用户名或密码错误");
+        }
+        return upuser;
+    }
+
+    public User register(User user) {
+        User dbUser = userMapper.selectByUsername(user.getUsername());
+        if (dbUser != null) {
+            // 抛出一个自定义的异常
+            throw new ServiceException("用户名已存在");
+        }
+        user.setName(user.getUsername());
+        userMapper.insert(user);
+        return user;
     }
 }
