@@ -4,6 +4,7 @@ import com.example.poj_1.common.Page;
 import com.example.poj_1.eneity.User;
 import com.example.poj_1.exception.ServiceException;
 import com.example.poj_1.mapper.UserMapper;
+import com.example.poj_1.utils.TokenUtils;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,8 @@ public class UserService {
         if(!Objects.equals(user.getPassword(), upuser.getPassword())){
             throw new ServiceException("用户名或密码错误");
         }
+        String token = TokenUtils.createToken(upuser.getId().toString(), upuser.getPassword());
+        upuser.setToken(token);
         return upuser;
     }
 

@@ -39,7 +39,7 @@
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人信息</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
+                <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -119,6 +119,10 @@ export default {
       this.isCollapse = !this.isCollapse
       this.asideWidth = this.isCollapse ? '64px' : '200px'
       this.collapseIcon = this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
+    },
+    logout(){
+      localStorage.removeItem('honey-user')
+      this.$router.push('/login')
     }
   }
 }
