@@ -8,10 +8,11 @@ import com.example.poj_1.eneity.Obj;
 import com.example.poj_1.eneity.User;
 import com.example.poj_1.service.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Configuration
 @RestController
 public class WebController {
     @Resource

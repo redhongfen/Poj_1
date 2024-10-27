@@ -50,7 +50,7 @@
             早安，骚年，祝你开心每一天！
           </div>
           <div style="display: flex;">
-          <el-card style="width: 50%;margin-right: 10px;">
+          <el-card style="width: 30%;margin-right: 10px;">
               <div slot="header" class="clearfix">
                 <span>青哥哥带你做毕设2024</span>
               </div>
@@ -66,7 +66,7 @@
                 </div>
               </div>
             </el-card>
-            <el-card style="width: 50%">
+            <el-card style="width: 70%">
               <div slot="header" class="clearfix">
                 <span>用户数据</span>
               </div>
@@ -76,16 +76,55 @@
                   <el-table-column label="用户名" prop="username"></el-table-column>
                   <el-table-column label="姓名" prop="name"></el-table-column>
                   <el-table-column label="地址" prop="address"></el-table-column>
+                  <el-table-column label="文件上传">
+                    <template v-slot="scope">
+                      <el-upload
+                        action="http://localhost:8081/file/upload"
+                        :headers="{token:user.token}"
+                        :show-flie-list="false"
+                        :on-success="(row,file,fileList)=>handleTableFileUpload(scope.row,file,fileList)"
+                        >
+                        <el-button size="mini" type="primary">点击上传</el-button>
+                      </el-upload>
+                    </template>
+                  </el-table-column>
+                  <el-table-column table="文件上传">
+                    <template v-slot="scope">
+                      <el-image v-if="scope.row.avatar" :src="scope.row.avatar" style="width: 50px;height: 50px;"></el-image>
+                      <div><el-button @click="preview(scope.row.avatar)">预览</el-button></div>
+                    </template>
+                  </el-table-column>
                 </el-table>
               </div>
             </el-card>
           </div>
-<!--          <el-table stripe :header-cell-style="{ backgroundColor: 'aliceblue', fontWeight: 'bold', color: '#333' }">-->
-<!--            <el-table-column label="姓名" align="center"></el-table-column>-->
-<!--            <el-table-column label="电话" align="center"></el-table-column>-->
-<!--            <el-table-column label="邮箱" align="center"></el-table-column>-->
-<!--            <el-table-column label="地址" align="center"></el-table-column>-->
-<!--          </el-table>-->
+          <div style="display: flex;margin: 10px 0;">
+            <el-card style="width: 70%;margin-right: 10px;">
+              <div slot="header" class="clearfix">
+                <span>文件上传下载</span>
+              </div>
+              <div style="margin: 10px 0;">
+                <el-upload
+                    action="http://localhost:8081/file/upload"
+                    :headers="{token: user.token}"
+                    :on-success="handleFileUpload"
+                  >
+                  <el-button size="mini" type="success">单文件上传</el-button>
+                </el-upload>
+              </div>
+              <div style="margin: 10px 0;">
+                <el-upload
+                    action="http://localhost:8081/file/upload"
+                    :headers="{token: user.token}"
+                    :on-success="handleMultipleFileUpload"
+                    multiple
+                  >
+                  <el-button size="mini" type="success">多文件上传</el-button>
+                </el-upload>
+                <el-button type="primary" style="margin:  10px 0;" @click="showUrls">显示上传文件</el-button>
+              </div>
+            </el-card>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -104,14 +143,46 @@ export default {
       isCollapse: false,
       asideWidth: '200px',
       collapseIcon: 'el-icon-s-fold',
-      users:[]
+      users:[],
+      user:JSON.parse(localStorage.getItem('honey-user')||'{}'),
+      url:'',
+      urls:[]
     }
   },
   mounted() {
-  request.get('/user/selectAll').then(res =>
-    this.users=res.data
-  )},
+    request.get('/user/selectAll').then(res =>{
+      this.users=res.data
+    })
+  },
   methods: {
+    preview(url){
+      window.open(url)
+    },
+    showUrls(){
+      console.log(this.urls)
+    },
+    handleMultipleFileUpload(response,file,fileList){
+      // console.log(response, file, fileList)
+      this.urls = fileList.map(v => v.response?.data || '');
+    },
+    handleTableFileUpload(row, file, fileList) {
+      console.log(row, file, fileList)
+      row.avatar = file.response.data
+      // this.$set(row, 'avatar', file.response.data)
+      console.log(row)
+      // 触发更新就可以了
+      request.put('/user/update', row).then(res => {
+        if (res.code === '200') {
+          this.$message.success('上传成功')
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+    handleFileUpload(respons,file,fileList){
+      this.fileList=fileList
+
+    },
     handleFullScreen() {
       document.documentElement.requestFullscreen()
     },
