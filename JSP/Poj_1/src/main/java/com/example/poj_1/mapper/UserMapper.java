@@ -26,9 +26,33 @@ public interface UserMapper {
     List<User> selectByMore(@Param("username") String username, @Param("name") String name);
     @Select("select * from `user` where username like concat('%', #{username}, '%') and name like concat('%', #{name}, '%') order by id desc")
     List<User> selectByMo(String username, String name);
-    @Select("select * from `user` where username like concat('%', #{username}, '%') and name like concat('%', #{name}, '%') order by id desc limit #{skipNum}, #{pageSize}")
-    List<User> selectByPage(@Param("skipNum") Integer skipNum, @Param("pageSize")Integer pageSize, @Param("username") String username, @Param("name") String name);
-    @Select("select count(id) from `user` where username like concat('%', #{username}, '%') and name like concat('%', #{name}, '%') order by id desc")
+    @Select({
+            "<script>",
+            "SELECT * FROM `user`",
+            "WHERE 1=1",  // 添加一个常量条件，确保 SQL 语法始终有效",
+            "<if test='username != null and username != \"\"'>",
+            "AND username LIKE CONCAT('%', #{username}, '%')",
+            "</if>",
+            "<if test='name != null and name != \"\"'>",
+            "AND name LIKE CONCAT('%', #{name}, '%')",
+            "</if>",
+            "ORDER BY id DESC",
+            "LIMIT #{skipNum}, #{pageSize}",
+            "</script>"
+    })
+    List<User> selectByPage(@Param("skipNum") Integer skipNum, @Param("pageSize") Integer pageSize,
+                            @Param("username") String username, @Param("name") String name);
+    @Select({
+            "<script>",
+            "SELECT COUNT(id) FROM `user` WHERE 1=1",  // 确保 SQL 语法有效",
+            "<if test='username != null and username != \"\"'>",
+            "AND username LIKE CONCAT('%', #{username}, '%')",
+            "</if>",
+            "<if test='name != null and name != \"\"'>",
+            "AND name LIKE CONCAT('%', #{name}, '%')",
+            "</if>",
+            "</script>"
+    })
     int selectCountByPage(@Param("username") String username, @Param("name") String name);
 
     @Select("select * from `user` where username = #{username} order by id desc")
