@@ -71,7 +71,7 @@
                 <el-form-item label="头像">
                 <el-upload
                     class="avatar-uploader"
-                    action="http://localhost:8081/file/upload"
+                    action='http://localhost:8081/file/upload'
                     :headers="{ token: user.token }"
                     :file-list="form.avatar? [form.avatar] : []"
                     list-type="picture"

@@ -6,10 +6,9 @@
         <div style="display: flex;">
             <el-card style="width: 100%;">
                 <div slot="header" class="clearfix">
-                    <span>青哥哥带你做毕设2024</span>
+                    <span>早安lqs</span>
                 </div>
                 <div>
-                    2024毕设正式开始了！青哥哥带你手把手敲出来！
                     <div style="margin-top: 20px">
                         <div style="margin: 10px 0"><strong>主题色</strong></div>
                         <el-button type="primary">按钮</el-button>
