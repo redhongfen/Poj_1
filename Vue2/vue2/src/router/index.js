@@ -9,6 +9,8 @@ import AuthView from '@/views/manager/AuthView.vue';
 import NullView from '@/views/404View.vue'
 import PresonView from '@/views/manager/PresonView.vue';
 import PasswordView from '@/views/manager/PasswordView.vue';
+import ShoppingView from '@/views/manager/ShoppingView.vue';
+import GoodsView from '@/views/manager/GoodsView.vue';
 Vue.use(VueRouter);
 
 const routes=[
@@ -20,10 +22,11 @@ const routes=[
     children:[
       {path:'home',name:'HomeView',meta:{name:'首页系统'},component:HomeView},
       {path:'user',name:'UserView',meta:{name:'用户信息'},component:UserView},
+      {path: 'shopping',name: 'ShoppingView',meta:{name:'商品页面'},component: ShoppingView},
       {path: '403',name: 'AuthView',meta:{name:'无权限'},component: AuthView,},
       {path: 'preson',name: 'PresonView',meta:{name:'个人信息'},component: PresonView,},
       {path: 'password',name: 'PasswordView',meta:{name:'修改密码'},component: PasswordView,},
-
+      {path:'goods',name:'GoodsView',meta:{name:'购物车'},component:GoodsView}
     ]
   },
   {path: '/login',name: 'LoginView',meta:{name:'登录'},component: LoginView,},

@@ -16,9 +16,18 @@
           <el-submenu index="info" v-if="user.role==='管理员'">
             <template slot="title">
               <i class="el-icon-menu"></i>
-              <span>信息管理</span>
+              <span>信息页面</span>
             </template>
             <el-menu-item index="/user">用户信息</el-menu-item>
+            <el-menu-item index="/shopping">商品页面</el-menu-item>
+          </el-submenu>
+          <el-submenu index="info" v-if="user.role==='用户'">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>商城</span>
+            </template>
+            <el-menu-item index="/goods">购物车</el-menu-item>
+            <el-menu-item index="/shopping">商品页面</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -48,7 +57,7 @@
         </el-header>
 
         <el-main>
-          <router-view @update:user="updateUser"/>
+          <router-view  @update:user="updateUser"/>
           <!-- <div style="box-shadow: 0 0 10px rgba(0,0,0,.1); padding: 10px 20px; border-radius: 5px; margin-bottom: 10px">
             早安，骚年，祝你开心每一天！
           </div>

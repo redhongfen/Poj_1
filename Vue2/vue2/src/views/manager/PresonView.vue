@@ -5,7 +5,7 @@
           <div style="margin: 15px; text-align: center">
             <el-upload
                 class="avatar-uploader"
-                action="http://111.230.182.33:8081/file/upload"
+                action="http://localhost:8081/file/upload"
                 :headers="{ token: user.token }"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
@@ -26,8 +26,8 @@
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="user.email" placeholder="邮箱"></el-input>
           </el-form-item>
-          <el-form-item label="地址" prop="address">
-            <el-input type="textarea" v-model="user.address" placeholder="地址"></el-input>
+          <el-form-item label="备注" prop="address">
+            <el-input type="textarea" v-model="user.address" placeholder="备注"></el-input>
           </el-form-item>
           <div style="text-align: center; margin-bottom: 20px">
             <el-button type="primary" @click="update">保 存</el-button>

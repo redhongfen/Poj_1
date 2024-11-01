@@ -4,6 +4,7 @@ package com.example.poj_1.controller;
 import cn.hutool.core.io.FileUtil;
 import com.example.poj_1.common.AuthAccess;
 import com.example.poj_1.common.Result;
+import com.example.poj_1.eneity.User;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
