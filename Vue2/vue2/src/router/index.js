@@ -9,6 +9,11 @@ import AuthView from '@/views/manager/AuthView.vue';
 import NullView from '@/views/404View.vue'
 import PresonView from '@/views/manager/PresonView.vue';
 import PasswordView from '@/views/manager/PasswordView.vue';
+import CoursesView from '@/views/manager/CoursesView.vue';
+import TeachersView from '@/views/manager/TeachersView.vue';
+import StudentsView from '@/views/manager/StudentsView.vue';
+import EnrollmentsView from '@/views/manager/EnrollmentsView.vue';
+import GradesView from '@/views/manager/GradesView.vue';
 Vue.use(VueRouter);
 
 const routes=[
@@ -23,6 +28,11 @@ const routes=[
       {path: '403',name: 'AuthView',meta:{name:'无权限'},component: AuthView,},
       {path: 'preson',name: 'PresonView',meta:{name:'个人信息'},component: PresonView,},
       {path: 'password',name: 'PasswordView',meta:{name:'修改密码'},component: PasswordView,},
+      {path: 'courses',name: 'CoursesView',meta:{name:'课程信息'},component: CoursesView,},
+      {path: 'students',name: 'StudentsView',meta:{name:' 学生信息'},component: StudentsView,},
+      {path: 'teachers',name: 'TeachersView',meta:{name:'教师信息'},component: TeachersView,},
+      {path: 'enrollments',name: 'EnrollmentsView',meta:{name:'选课信息'},component: EnrollmentsView,},
+      {path: 'grades',name: 'GradesView',meta:{name:'成绩信息'},component: GradesView,},
 
     ]
   },

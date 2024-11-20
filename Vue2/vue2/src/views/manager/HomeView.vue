@@ -6,7 +6,6 @@
         <div style="display: flex;">
             <el-card style="width: 100%;">
                 <div slot="header" class="clearfix">
-                    <span>早安lqs</span>
                 </div>
                 <div>
                     <div style="margin-top: 20px">
