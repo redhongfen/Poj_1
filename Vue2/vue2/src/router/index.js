@@ -14,6 +14,8 @@ import TeachersView from '@/views/manager/TeachersView.vue';
 import StudentsView from '@/views/manager/StudentsView.vue';
 import EnrollmentsView from '@/views/manager/EnrollmentsView.vue';
 import GradesView from '@/views/manager/GradesView.vue';
+import StudentGradesView from '@/views/manager/StudentGradesView.vue';
+import SummaryView from '@/views/manager/SummaryView.vue';
 Vue.use(VueRouter);
 
 const routes=[
@@ -32,8 +34,9 @@ const routes=[
       {path: 'students',name: 'StudentsView',meta:{name:' 学生信息'},component: StudentsView,},
       {path: 'teachers',name: 'TeachersView',meta:{name:'教师信息'},component: TeachersView,},
       {path: 'enrollments',name: 'EnrollmentsView',meta:{name:'选课信息'},component: EnrollmentsView,},
-      {path: 'grades',name: 'GradesView',meta:{name:'成绩信息'},component: GradesView,},
-
+      {path: 'grades',name: 'GradesView',meta:{name:'成绩管理'},component: GradesView,},
+      {path: 'gradesstudent',name: 'StudentGradesView',meta:{name:'成绩信息'},component: StudentGradesView,},
+      {path: 'summary',name: 'SummaryView',meta:{name:'成绩信息'},component: SummaryView,},
     ]
   },
   {path: '/login',name: 'LoginView',meta:{name:'登录'},component: LoginView,},

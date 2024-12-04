@@ -7,8 +7,8 @@
             <el-button type="info" @click="reset">重置</el-button>
         </div>
         <div style="margin: 10px 0">
-            <el-button type="primary" plain @click="handleAdd">新增</el-button>
-            <el-button type="danger" plain @click="delBatch">批量删除</el-button>
+            <!-- <el-button type="primary" plain @click="handleAdd">新增</el-button>
+            <el-button type="danger" plain @click="delBatch">批量删除</el-button> -->
         </div>
         <el-table :data="tableData" stripe :header-cell-style="{ backgroundColor: 'aliceblue', color: '#666' }" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -88,7 +88,7 @@ export default{
     },
     
     methods:{
-
+        // eslint-disable-next-line no-unused-vars
         delBatch() {
             if (!this.ids.length) {
                 this.$message.warning('请选择数据')
@@ -106,6 +106,7 @@ export default{
                 })
             }).catch(() => {})
         },
+        // eslint-disable-next-line no-unused-vars
         handleSelectionChange(rows) {   // 当前选中的所有的行数据
             this.ids = rows.map(v => v.id)
         },
@@ -126,6 +127,7 @@ export default{
             this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
             this.fromVisible = true   // 打开弹窗
         },
+        // eslint-disable-next-line no-unused-vars
         handleAdd() {   // 新增数据
             this.form = { role: '用户' }  // 新增数据的时候清空数据
             this.fromVisible = true   // 打开弹窗

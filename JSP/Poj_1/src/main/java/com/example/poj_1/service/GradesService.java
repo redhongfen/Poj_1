@@ -50,5 +50,12 @@ public class GradesService {
 
         return page;
     }
+
+    public List<Grades> selectByStudentId(String student_id) {return gradesMapper.selectListByStudentId(student_id);
+    }
+    public void deleteGradesByStudentAndCourse(Integer studentId, String courseCode) {
+        gradesMapper.deleteByStudentAndCourse(studentId, courseCode);
+    }
+
 }
 

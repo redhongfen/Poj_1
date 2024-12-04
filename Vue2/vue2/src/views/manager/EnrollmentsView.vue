@@ -13,7 +13,7 @@
             <el-table-column label="课程名称" prop="course_name" align="center"></el-table-column>
             <el-table-column label="学分" prop="credits" align="center"></el-table-column>
             <el-table-column label="课程简介" prop="description" align="center"></el-table-column>
-            <el-table-column label="学期" prop="semester" align="center"></el-table-column>
+            <el-table-column label="上课时间" prop="semester" align="center"></el-table-column>
 
             <el-table-column label="操作" align="center">
                 <template v-slot="scope">
@@ -121,6 +121,19 @@ export default {
                     this.$message.error(res.msg);
                 }
             });
+// eslint-disable-next-line no-unused-vars
+            this.$request.post('/grades/add', {
+        student_id: this.user.id,
+        course_code: course.course_code,
+    }).then((res) => {
+        // eslint-disable-next-line no-empty
+        if (res.code === '200') {
+        } else {
+            this.$message.error(res.msg);
+        }
+    });
+
+
         },
 
         // 取消选课逻辑
@@ -138,6 +151,17 @@ export default {
                     }
                 });
             }
+// eslint-disable-next-line no-unused-vars
+            
+            this.$request.delete(`/grades/delete/${this.user.id}/${course.course_code}`).then((res) => {
+                // eslint-disable-next-line no-empty
+        if (res.code === '200') {
+        } else {
+            this.$message.error(res.msg);
+        }
+    });
+
+            
         },
 
         // 判断课程是否已经选修

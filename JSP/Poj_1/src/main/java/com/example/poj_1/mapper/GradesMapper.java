@@ -68,4 +68,10 @@ public interface GradesMapper {
             "</script>"
     })
     int selectCountByPage(@Param("course_code") String course_code, @Param("student_id") String student_id);
+    @Select("SELECT * FROM grades WHERE student_id = #{student_id}")
+    List<Grades> selectListByStudentId(@Param("student_id")String student_id);
+
+    @Delete("DELETE FROM grades WHERE student_id = #{studentId} AND course_code = #{courseCode}")
+    void deleteByStudentAndCourse(@Param("studentId") Integer studentId, @Param("courseCode") String courseCode);
+
 }

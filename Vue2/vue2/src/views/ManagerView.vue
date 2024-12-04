@@ -18,12 +18,32 @@
               <i class="el-icon-menu"></i>
               <span>信息管理</span>
             </template>
-            <el-menu-item index="/user">用户信息</el-menu-item>
-            <el-menu-item index="/courses">课程信息</el-menu-item>
-            <el-menu-item index="/students">学生信息</el-menu-item>
-            <el-menu-item index="/teachers">教师信息</el-menu-item>
-            <el-menu-item index="/grades">成绩信息</el-menu-item>
-            <el-menu-item index="/enrollments">选课信息</el-menu-item>
+              <el-menu-item index="/user" >用户信息</el-menu-item>
+              <el-menu-item index="/courses">课程信息</el-menu-item>
+              <el-menu-item index="/students">学生信息</el-menu-item>
+              <el-menu-item index="/teachers">教师信息</el-menu-item>
+              <el-menu-item index="/grades">成绩管理</el-menu-item>
+              <el-menu-item index="/enrollments">选课管理</el-menu-item>
+              <el-menu-item index="/gradesstudent">成绩信息</el-menu-item>
+              <el-menu-item index="/summary" >汇总分析</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="info" v-if="user.role==='学生'">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>信息管理</span>
+            </template>
+              <el-menu-item index="/enrollments">选课管理</el-menu-item>
+              <el-menu-item index="/gradesstudent">成绩信息</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="info" v-if="user.role==='教师'">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>信息管理</span>
+            </template>
+              <el-menu-item index="/grades">成绩管理</el-menu-item>
+              <el-menu-item index="/summary" >汇总分析</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>

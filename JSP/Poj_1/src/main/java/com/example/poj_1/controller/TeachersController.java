@@ -67,7 +67,7 @@ public class TeachersController {
         return Result.success(teachersList);
     }
 
-    @GetMapping("/getByPage")
+    @GetMapping("/selectByPage")
     public Result getTeachersByPage(@RequestParam Integer pageNum,
                                     @RequestParam Integer pageSize,
                                     @RequestParam(required = false) String name,

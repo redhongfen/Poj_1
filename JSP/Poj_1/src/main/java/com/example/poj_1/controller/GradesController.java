@@ -50,6 +50,11 @@ public class GradesController {
         gradesService.batchDeleteGrades(ids);
         return Result.success();
     }
+    @DeleteMapping("/delete/{studentId}/{courseCode}")
+    public Result deleteByStudentAndCourse(@PathVariable Integer studentId, @PathVariable String courseCode) {
+        gradesService.deleteGradesByStudentAndCourse(studentId, courseCode);
+        return Result.success();
+    }
 
     @GetMapping("/selectAll")
     public Result selectAll() {
@@ -62,7 +67,11 @@ public class GradesController {
         Grades grades = gradesService.selectById(id);
         return Result.success(grades);
     }
-
+    @GetMapping("/selectByStudentId/{student_id}")
+    public Result selectByStudentId(@PathVariable String student_id) {
+        List<Grades> gradesList = gradesService.selectByStudentId(student_id);
+        return Result.success(gradesList);
+    }
     @GetMapping("/selectByPage")
     public Result selectByPage(@RequestParam Integer pageNum,
                                @RequestParam Integer pageSize,
